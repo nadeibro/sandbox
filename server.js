@@ -15,6 +15,12 @@ console.log = (...args) => {
 };
 
 const server = http.createServer((req, res) => {
+  // Allow Socket.IO to serve its client and WebSocket endpoints under /socket/
+  if (req.url.startsWith('/socket/')) {
+    // Socket.IO will handle the response
+    return;
+  }
+
   let file = req.url === '/' ? '/index.html' : req.url;
   const filePath = path.join(__dirname, 'public', file);
   fs.readFile(filePath, (err, data) => {
@@ -23,8 +29,8 @@ const server = http.createServer((req, res) => {
       return res.end('Not found');
     }
     const ext = path.extname(filePath);
-    const types = {'.html':'text/html','.css':'text/css','.js':'text/javascript'};
-    res.writeHead(200, {'Content-Type': types[ext] || 'text/plain'});
+    const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript' };
+    res.writeHead(200, { 'Content-Type': types[ext] || 'text/plain' });
     res.end(data);
   });
 });
