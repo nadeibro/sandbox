@@ -8,6 +8,17 @@ npm start
 
 Open `http://localhost:3000` in a browser to see live logs and send events.
 
+### Docker Compose
+
+To run the server in Docker:
+
+```bash
+docker-compose up --build
+```
+
+The UI will be available at `http://localhost:3000` and logs will be
+stored in the local `events.log` file.
+
 ### Emit from command line
 
 The server accepts arbitrary Socket.IO events. Example:
