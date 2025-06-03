@@ -1,0 +1,37 @@
+[2025-05-12T12:29:08.745Z] OUT * push "{\"title\":\"Mock backend\",\"body\":\"handshake success\"}"
+[2025-05-12T12:32:14.595Z] OUT * push "{\"title\":\"Mock backend\",\"body\":\"handshake success\"}"
+[2025-05-12T12:34:39.638Z] OUT * push "eventAdapter"
+[2025-05-12T12:34:47.646Z] OUT * push "\"{\\\"title\\\":\\\"Mock backend\\\",\\\"body\\\":\\\"handshake success\\\"}\""
+[2025-05-12T12:36:40.866Z] OUT * push "\"{\\\"title\\\":\\\"Mock backend\\\",\\\"body\\\":\\\"handshake success\\\"}\""
+[2025-05-12T12:40:25.558Z] OUT * push "\"{\\\"title\\\":\\\"Mock backend\\\",\\\"body\\\":\\\"handshake success\\\"}\""
+[2025-05-12T12:40:32.784Z] OUT * push "\"{\\\"title\\\":\\\"Mock backend\\\",\\\"body\\\":\\\"handshake success\\\"}\""
+[2025-05-12T12:40:36.759Z] OUT * push "test"
+[2025-05-12T13:04:58.214Z] OUT * push "test"
+[2025-05-12T13:05:51.747Z] OUT * push "[SurveyUpdatedEvent: {'test': 2}]"
+[2025-05-12T13:12:00.887Z] IN  0RvGuiEEcUrRuwEWAAAA connect {"host":"127.0.0.1:3000","connection":"upgrade","upgrade":"websocket","sec-websocket-key":"bQ/DlwW451zvLG6UdsTq0w==","sec-websocket-version":"13","sec-websocket-extensions":"permessage-deflate; client_max_window_bits","accept":"*/*","accept-language":"*","sec-fetch-mode":"websocket","user-agent":"node","pragma":"no-cache","cache-control":"no-cache","accept-encoding":"gzip, deflate"}
+[2025-05-12T13:12:00.887Z] OUT 0RvGuiEEcUrRuwEWAAAA push {"title":"mock","body":"handshake success"}
+[2025-05-12T13:12:00.888Z] IN  0RvGuiEEcUrRuwEWAAAA push "ws:account/subscribe {\"authorization\":\"Basic RE9OMUFIMU1BRE9RQUdROjkzYmM0MDU3LTAyNzItNGEzOC1iMzBkLTU2YTFmNTY3YjExNg==\"}"
+[2025-05-12T13:12:00.889Z] IN  0RvGuiEEcUrRuwEWAAAA disconnect "client namespace disconnect"
+[2025-05-12T13:40:08.125Z] IN  sD8-2WazeRKaBAe-AAAA connect {"user-agent":"Dart/3.7 (dart:io)","connection":"Upgrade","cache-control":"no-cache","accept-encoding":"gzip","sec-websocket-version":"13","host":"localhost:3000","sec-websocket-extensions":"permessage-deflate; client_max_window_bits","sec-websocket-key":"o2AP2uI+SvUXvn8LPnyFvw==","x-app-version":"donro 1.1.14+314 iOS 18.4 iPhone","upgrade":"websocket"}
+[2025-05-12T13:40:08.127Z] OUT sD8-2WazeRKaBAe-AAAA push {"title":"mock","body":"handshake success"}
+[2025-05-12T13:40:08.185Z] IN  sD8-2WazeRKaBAe-AAAA ws:account/subscribe {"authorization":"Basic RE9OMUFIMU1BRE9RQUdROmU4YzQwMmM5LWY1NDMtNGM4Zi04NjRjLWUyOTA5MGYwZmQ5OQ=="}
+[2025-05-12T13:40:08.186Z] IN  sD8-2WazeRKaBAe-AAAA ws:account/subscribe {"authorization":"Basic RE9OMUFIMU1BRE9RQUdROmU4YzQwMmM5LWY1NDMtNGM4Zi04NjRjLWUyOTA5MGYwZmQ5OQ=="}
+[2025-05-12T13:40:08.699Z] IN  sD8-2WazeRKaBAe-AAAA disconnect "client namespace disconnect"
+[2025-05-12T13:40:08.759Z] OUT q0LzgkPhTmCzTqbuAAAB push {"title":"mock","body":"handshake success"}
+[2025-05-12T13:40:08.759Z] IN  q0LzgkPhTmCzTqbuAAAB connect {"user-agent":"Dart/3.7 (dart:io)","connection":"Upgrade","cache-control":"no-cache","accept-encoding":"gzip","sec-websocket-version":"13","host":"localhost:3000","sec-websocket-extensions":"permessage-deflate; client_max_window_bits","sec-websocket-key":"7hbVaYQdsJGOP9kqcYfEEg==","x-app-version":"donro 1.1.14+314 iOS 18.4 iPhone","upgrade":"websocket"}
+[2025-05-12T13:40:09.579Z] OUT q04K_9IZUp_OJmgsAAAC push {"title":"mock","body":"handshake success"}
+[2025-05-12T13:40:09.578Z] IN  q04K_9IZUp_OJmgsAAAC connect {"user-agent":"Dart/3.7 (dart:io)","connection":"Upgrade","cache-control":"no-cache","accept-encoding":"gzip","sec-websocket-version":"13","host":"localhost:3000","sec-websocket-extensions":"permessage-deflate; client_max_window_bits","sec-websocket-key":"L521rdC5I6qO9KG49CtYIg==","x-app-version":"donro 1.1.14+314 iOS 18.4 iPhone","upgrade":"websocket"}
+[2025-05-12T13:40:10.308Z] IN  q04K_9IZUp_OJmgsAAAC ws:account/subscribe {"authorization":"Basic RE9OMUFIMU1BRE9RQUdROmU4YzQwMmM5LWY1NDMtNGM4Zi04NjRjLWUyOTA5MGYwZmQ5OQ=="}
+[2025-05-12T13:40:10.308Z] IN  q04K_9IZUp_OJmgsAAAC ws:account/subscribe {"authorization":"Basic RE9OMUFIMU1BRE9RQUdROmU4YzQwMmM5LWY1NDMtNGM4Zi04NjRjLWUyOTA5MGYwZmQ5OQ=="}
+[2025-05-12T13:40:10.335Z] IN  q04K_9IZUp_OJmgsAAAC disconnecting "forced close"
+[2025-05-12T13:40:23.932Z] OUT * push "test"
+[2025-05-12T13:40:45.728Z] OUT * push "[{'test':da}]"
+[2025-05-12T13:40:52.694Z] OUT * push "[{'test':da}]"
+[2025-05-12T13:41:19.793Z] IN  q04K_9IZUp_OJmgsAAAC disconnect "client namespace disconnect"
+[2025-05-12T13:41:19.885Z] IN  AoDNXdhl2vtTO_H2AAAD connect {"user-agent":"Dart/3.7 (dart:io)","connection":"Upgrade","cache-control":"no-cache","accept-encoding":"gzip","sec-websocket-version":"13","host":"localhost:3000","sec-websocket-extensions":"permessage-deflate; client_max_window_bits","sec-websocket-key":"/0iZ2pyiG6tibWhCHN3lZQ==","x-app-version":"donro 1.1.14+314 iOS 18.4 iPhone","upgrade":"websocket"}
+[2025-05-12T13:41:19.885Z] OUT AoDNXdhl2vtTO_H2AAAD push {"title":"mock","body":"handshake success"}
+[2025-05-12T13:41:21.212Z] OUT Hugw03rAn6ATsYs6AAAE push {"title":"mock","body":"handshake success"}
+[2025-05-12T13:41:21.212Z] IN  Hugw03rAn6ATsYs6AAAE connect {"user-agent":"Dart/3.7 (dart:io)","connection":"Upgrade","cache-control":"no-cache","accept-encoding":"gzip","sec-websocket-version":"13","host":"localhost:3000","sec-websocket-extensions":"permessage-deflate; client_max_window_bits","sec-websocket-key":"+VfRNw0GnypjZbb87bOQNg==","x-app-version":"donro 1.1.14+314 iOS 18.4 iPhone","upgrade":"websocket"}
+[2025-05-12T13:41:21.214Z] IN  Hugw03rAn6ATsYs6AAAE ws:account/subscribe {"authorization":"Basic RE9OMUFIMU1BRE9RQUdROmU4YzQwMmM5LWY1NDMtNGM4Zi04NjRjLWUyOTA5MGYwZmQ5OQ=="}
+[2025-05-12T13:41:21.214Z] IN  Hugw03rAn6ATsYs6AAAE ws:account/subscribe {"authorization":"Basic RE9OMUFIMU1BRE9RQUdROmU4YzQwMmM5LWY1NDMtNGM4Zi04NjRjLWUyOTA5MGYwZmQ5OQ=="}
+[2025-05-12T13:41:21.216Z] IN  Hugw03rAn6ATsYs6AAAE disconnecting "forced close"
