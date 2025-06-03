@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket Logs</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Socket Logs</h1>
+  <pre id="log"></pre>
+
+  <h2>Send Event</h2>
+  <form id="emitForm">
+    <input type="text" id="eventName" placeholder="event name" required>
+    <textarea id="eventPayload" placeholder="payload (JSON or text)"></textarea>
+    <button type="submit">Send</button>
+  </form>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
