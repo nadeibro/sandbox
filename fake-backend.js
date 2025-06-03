@@ -32,3 +32,6 @@ const PORT = 3000;
 server.listen(PORT, () =>
     console.log(`🛰  HTTP-mock up → ws://<IP-Mac>:${PORT}/socket/?lang=en`)
 );
+
+
+// 'https://dev.don.ro:0/socket/?EIO=3&transport=websocket#
