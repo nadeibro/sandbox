@@ -6,7 +6,7 @@ const util = require('util');
 const socketio = require('socket.io');
 
 // ─── Настройки ───────────────────────────────────────────────────────────────
-const PORT = process.env.PORT || 3999;
+const PORT = process.env.PORT || 3000;
 const STATIC_DIR = path.join(__dirname, 'public');
 const LOG_PATH = path.join(__dirname, 'events.log');
 const GLOBAL_ROOM = '42room';
@@ -25,7 +25,7 @@ console.log = log;
 
 // ─── HTTP-сервер (простейшая раздача статики) ───────────────────────────────
 const server = http.createServer((req, res) => {
-  if (req.url.startsWith('/socket/')) return; // Socket.IO сам обработает
+  if (req.url.startsWith('/socket')) return; // Socket.IO сам обработает
 
   const filePath = path.join(STATIC_DIR, req.url === '/' ? 'index.html' : req.url);
   fs.readFile(filePath, (err, data) => {
@@ -54,10 +54,6 @@ io.on('connection', socket => {
   socket.on('ws:account/subscribe', ({ authorization }) => {
     log('[subscribe]', socket.id, authorization ?? '(no auth)');
     socket.join(GLOBAL_ROOM);
-
-    // welcome-сообщение можно убрать при необходимости
-    io.to(GLOBAL_ROOM).emit('message', { type: 'info', code: 200, text: 'welcome' });
-
 
   });
 
