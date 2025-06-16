@@ -1,52 +1,81 @@
+/* eslint-disable no-console */
 const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
 const socketio = require('socket.io');
 
-const logFile = fs.createWriteStream(path.join(__dirname, 'events.log'), { flags: 'a' });
-let io;
-const origLog = console.log;
-console.log = (...args) => {
+// ─── Настройки ───────────────────────────────────────────────────────────────
+const PORT = process.env.PORT || 3999;
+const STATIC_DIR = path.join(__dirname, 'public');
+const LOG_PATH = path.join(__dirname, 'events.log');
+const GLOBAL_ROOM = '42room';
+
+// ─── Логирование (stdout + файл + стрим в UI) ───────────────────────────────
+const logFile = fs.createWriteStream(LOG_PATH, { flags: 'a' });
+function log(...args) {
   const msg = util.format(...args);
-  origLog(msg);
-  logFile.write(`[${new Date().toISOString()}] ${msg}\n`);
-  if (io) io.emit('log', msg);
-};
+  const time = new Date().toISOString();
+  console._orig(msg);                       // в терминал
+  logFile.write(`[${time}] ${msg}\n`);      // в файл
+  if (io) io.emit('log', msg);              // в UI через сокет
+}
+console._orig = console.log;
+console.log = log;
 
+// ─── HTTP-сервер (простейшая раздача статики) ───────────────────────────────
 const server = http.createServer((req, res) => {
-  // Allow Socket.IO to serve its client and WebSocket endpoints under /socket/
-  if (req.url.startsWith('/socket/')) {
-    // Socket.IO will handle the response
-    return;
-  }
+  if (req.url.startsWith('/socket/')) return; // Socket.IO сам обработает
 
-  let file = req.url === '/' ? '/index.html' : req.url;
-  const filePath = path.join(__dirname, 'public', file);
+  const filePath = path.join(STATIC_DIR, req.url === '/' ? 'index.html' : req.url);
   fs.readFile(filePath, (err, data) => {
     if (err) {
-      res.writeHead(404);
-      return res.end('Not found');
+      res.writeHead(404); return res.end('Not found');
     }
-    const ext = path.extname(filePath);
-    const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript' };
-    res.writeHead(200, { 'Content-Type': types[ext] || 'text/plain' });
+    const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css' }[path.extname(filePath)]
+      || 'application/octet-stream';
+    res.writeHead(200, { 'Content-Type': mime });
     res.end(data);
   });
 });
 
-io = socketio(server, { path: '/socket/' });
+// ─── Socket.IO (всё в одном namespace) ───────────────────────────────────────
+const io = socketio(server, {
+  path: '/socket',
+  pingInterval: 25_000,       // соответствует handshake из прод-трейса
+  pingTimeout: 5_000,
+  transports: ['websocket', 'polling'] // handshake покажет "upgrades"
+});
 
 io.on('connection', socket => {
-  console.log('Client connected', socket.id);
+  log('[connect]', socket.id);
 
-  socket.on('sendEvent', ({event, payload}) => {
-    console.log('Received event from UI:', event, payload);
-    io.emit(event, payload);
+  // ― клиент присылает авторизацию → подписываем его на комнату
+  socket.on('ws:account/subscribe', ({ authorization }) => {
+    log('[subscribe]', socket.id, authorization ?? '(no auth)');
+    socket.join(GLOBAL_ROOM);
+
+    // welcome-сообщение можно убрать при необходимости
+    io.to(GLOBAL_ROOM).emit('message', { type: 'info', code: 200, text: 'welcome' });
+
+
   });
+
+
+  // ― UI-панель отдаёт произвольный event/payload
+  socket.on('sendEvent', ({ event, payload }) => {
+    if (!event) return;
+    log('[UI] → broadcast', event, payload);
+    io.to(GLOBAL_ROOM).emit(event, payload);
+
+  });
+
+  socket.on('disconnect', reason => log('[disconnect]', socket.id, reason));
 });
 
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
+// ─── Старт ───────────────────────────────────────────────────────────────────
+server.listen(PORT, () => log(`Server listening on http://localhost:${PORT}`));
+
+
+
+// {type: 'info', code: 200, text: 'welcome', data: null}
